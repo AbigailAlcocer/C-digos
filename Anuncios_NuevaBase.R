@@ -55,8 +55,8 @@ rm(list = ls())
 #---------------------------------------------------------------------------------------
 
 #wb_se <- "/Users/antoniogarcia/Desktop/R/5. inversiÃ³n/1. Datos/3. anuncios.xlsx" # Ruta Toño
-wb_se <- "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/3.1 anuncios.xlsx" #Ruta Abi
-anuncios_orig <- read_excel(wb_se, sheet = "Proyectos de inversión", col_names = T, range = "A2:S10000") %>% drop_na(`Empresa general`)
+wb_se <- "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/3. anuncios.xlsx" #Ruta Abi
+anuncios_orig <- read_excel(wb_se, sheet = "Hoja1", col_names = T, range = "A4:S10000") %>% drop_na(`Empresa general`)
 
 #Crear columna con la suma de las inversiones
 anuncios_orig <- anuncios_orig %>% replace_na(list(`Inversión anterior a 2019` = 0L, `Inversión en 2019` =0L, `Inversión en 2020` = 0L , `Inversión en 2021`= 0L, `Inversión en 2022` = 0L, `Inversión en 2023` = 0L, `Inversión en 2024` = 0L, `Inversión en 2025`= 0L, `Inversión en 2026` = 0L, `Inversión en 2027` = 0L))
@@ -123,6 +123,7 @@ anuncios <- anuncios %>%
       "EUAMéxicoMéxicoEUA" = "Estados Unidos",
       "Estados Unidos / Austria" = "Estados Unidos",
       "japón" = "Japón",
+      "Congo República Democrática del" = "Republica Democrática del Congo",
       "México- CanadáArgentina" = "Canadá")), pais = str_trim(pais),
     estado = str_replace_all(estado, c(
       "JaliscoNacional" = "Jalisco",
@@ -148,8 +149,14 @@ anuncios <- anuncios %>%
       "Baja California, Chihuahua, Jalisco, Ciudad de México" = "Baja California",
       "Baja California, Ciudad de México, Jalisco, No definido, Querétaro, Quintana Roo, Sinaloa y Tabasco." = "Nacional",
       "Chihuaha" = "Chihuahua",
-      "Ciudad de Mexico" = "Ciudad de México",
       "Nacional" = "México",
+      "Cancún, Mérida, Tuxtla Gutiérrez, Oaxaca y Puebla" = "Ciudad de México",
+      "Estado de México, Guadalajara, Guanajuato, San Luis Potorí, Coahuila, Querétaro, Nuevo León" = "No definido",
+      "Nuevo León." = "Nuevo León",
+      "Querérato" = "Querétaro",
+      "Quéretaro"= "Querétaro",
+      "Ciudad de México." = "Ciudad de México",
+      "Ciudad de Mexico" = "Ciudad de México",
       "Veracruz y Tamaulipas" = "Veracruz")), estado = str_trim(estado),
     empresa = str_replace_all(empresa, c(
       "Bayan TreeGrupo UBK" = "Bayan Tree",
@@ -172,16 +179,16 @@ anuncios <- anuncios %>%
 # 3) Crear Columna Sector
 anuncios <- anuncios %>% 
   mutate(sector = fct_collapse(area,
-                               `Automotriz` = c("Automotriz", "Fabricación de autopartes", "Autopartes", "Proveedor de resinas y materiales industriales", "Fabricación de autos", "Venta de automóviles", "Automotriz- equipo de transporte",  "Neumáticos", "Fabricación de Autopartes", "Fabricación de baterías para movilidad eléctrica", "Fabricación de motores", "Proveedor de sistemas y componentes automotrices", "Producción de vehículos eléctricos", "Fabricación de vehículos", "Fabricación de interiores de vehículos", "Fabricación de toldos eléctricos automotrices.", "Interiores de automóviles", "Vehículos eléctricos", "Fabricación de neumáticos", "Equipos de aire acondicionado para autos", "Automotriz- Tractocamiones", "Fabricación de motores", "Fabricación de componentes para automotrices", "Componentes eléctricos para vehículos", "Manufactura-Automotriz"),
+                               `Automotriz` = c("Automotriz", "Fabricación de autopartes", "Autopartes", "Proveedor de resinas y materiales industriales", "Fabricación de autos", "Venta de automóviles", "Automotriz- equipo de transporte",  "Neumáticos", "Fabricación de Autopartes", "Fabricación de baterías para movilidad eléctrica", "Fabricación de motores", "Proveedor de sistemas y componentes automotrices", "Producción de vehículos eléctricos", "Fabricación de vehículos", "Fabricación de interiores de vehículos", "Fabricación de toldos eléctricos automotrices.", "Interiores de automóviles", "Vehículos eléctricos", "Fabricación de neumáticos", "Equipos de aire acondicionado para autos", "Automotriz- Tractocamiones", "Fabricación de motores", "Fabricación de componentes para automotrices", "Componentes eléctricos para vehículos", "Manufactura-Automotriz", "Automóviles y autopartes", "Fabricación de autotanques y chasis para contenedores", "Fabricante de vehículos", "Sector automotriz"),
                                `Aeroespacial` = c("Aeroespacial", "Aeronaves", "Programa de lealtad"),
                                `Agroindustria` = c("Agronegocios información y cultura", "Plataforma de comercio agrícola", "Fertilizantes"),
                                `Bebidas Alcohólicas` = c("Industria de las bebidas", "Producción y comercialización de bebidas alcohólicas", "Industria cervecera", "Bebidas Alcohólicas Industria cervecera", "Industria de bebidas"),
-                               `Comercio al por Mayor` = c("Comerciantes mayoristas de muebles y artículos para el hogar", "Empaquetado", "Comercio al por mayor", "Empaques de papel", "Fabricación de empaques de cartón y papel", "Fabricación de envases de cartón", "Empaques alimentos", "Producción de envases"),
+                               `Comercio al por Mayor` = c("Comerciantes mayoristas de muebles y artículos para el hogar", "Empaquetado", "Comercio al por mayor", "Empaques de papel", "Fabricación de empaques de cartón y papel", "Fabricación de envases de cartón", "Empaques alimentos", "Producción de envases", "Otras industrias alimentarias"),
                                `Comercio al por Menor` = c("Alimentos y bebidas", "Producción de alimentos para mascotas", "Venta de artículos para el hogar", "Fabricación de lentes", "Producción de colchones", "perfumes y fragancias", "Fabricación de juguetes", "Comercio al por menor", "Fabricación de  herramientas para la construcción", "Comercio de materias primas para construcción", "Comercio de muebles y artículos del hogar", "Tiendas departamentales", "Fabricación de mobiliario", "Fabricación de productos de higiene personal", "Distribución de productos de acero y metal", "Productos para baño y cocina", "Mobiliaria", "Plataforma inmobiliaria", "Producción de juguetes", "Fabricación de muebles", "Mobiliario", "Producción de alimentos para mascotas", "Alimentos", "Elaboración de alimentos", "Comercio al por menor", "Alimentos y artículos de cuidado personal", "Ropa", "Inmuebles", "Fabricación de pinturas", "Fabricación de productos de limpieza y almacenamiento del hogar", "Producción de herramientas para la construcción", "Producción de herramientas para la construcción y herramientas eléctricas para uso en Exteriores", "Fabricación de mobiliario", "Fabricación de paneles de pantallas", "Producción de limpiaparabrisas", "Producción de contenidos", "Comercio electrónico", "Muebles", "e-commerce", "Elaboración de alimento para mascotas", "Equipamiento del hogar"),
-                               `Construcción` = c("Construcción de obras de ingeniería civil", "Construcción", "Infraestructura", "Construcción de obras para transporte ferroviario", "Sector Inmobiliario Industrial", "Construcción de puertos", "Construcción de vías", "Construcción de obras", "Construcción de autopistas", "Edificación no residencial", "Bienes Raíces (Fibras)", "Construcción de obras de ingeniera civil"),
+                               `Construcción` = c("Construcción de obras de ingeniería civil", "Construcción", "Infraestructura", "Construcción de obras para transporte ferroviario", "Sector Inmobiliario Industrial", "Construcción de puertos", "Construcción de vías", "Construcción de obras", "Construcción de autopistas", "Edificación no residencial", "Bienes Raíces (Fibras)", "Construcción de obras de ingeniera civil", "Vivienda"),
                                `Deporte` = c("Liga de futbol", "Gimnasios"),
                                `Educación` = c("Institución", "Educativa.", "Educación", "Institución Educativa."),
-                               `Electrónica` = c("Producción de semiconductores", "Servicios de producción electrónica", "Electrónica", "Componentes electrónicos", "Fabricación de componentes electrónicos", "Fabricación de interruptores electrónicos.", "Electrodomésticos", "Fabricación de semiconductores", "Fabricante de componentes electrónicos"),
+                               `Electrónica` = c("Producción de semiconductores", "Servicios de producción electrónica", "Electrónica", "Componentes electrónicos", "Fabricación de componentes electrónicos", "Fabricación de interruptores electrónicos.", "Electrodomésticos", "Fabricación de semiconductores", "Fabricante de componentes electrónicos", "Fabricación de accesorios, aparatos eléctricos", "Fabricación de aparatos electricos", "Soluciones integrales de ingenieria"),
                                `Energía` = c("Energía", "Generación de energía", "Generación, transmisión y distribución de energía eléctrica", "Medidores de energía", "Producción de energía", "Distribución de Gas Natural"),
                                `Energía Renovable` = c("Energía solar", "Energía eólica", "Energías limpias", "Energías Renovables"),
                                `Entretenimiento` = c("Entretenimiento", "Juegos de azar", "Venta de billetes de lotería", "Streaming y entretenimiento"),
@@ -189,14 +196,14 @@ anuncios <- anuncios %>%
                                `Financiero` = c("Arrendamiento financiero automotriz","Fondos de inversión", "Fondo de capital", "Servicios financieros", "Seguros de vida", "Casa de empeño", "Fondos de pensiones/", "Infraestructura social", "Financiamiento personal", "Sociedades financieras", "Instituciones de crédito", "Banca múltiple", "Grupo financiero", "Plataforma de servicios financieros", "Fondo de inversión"),
                                `Hidrocarburos` = c("Industria petrolera", "Petroquímica", "Perforación de pozos petroleros y de gas", "Extracción de petróleo", "Producción de gasolina", "Hidrocarburos", "Extracción de gas natural no asociado", "Gas natural", "Extracción de gas natural"),
                                `Hoteles` = c("Hoteles", "Servicios de alojamiento temporal", "Alquiler"),
-                               `Industria` = c("Sector Industrial", "Fabricación de calentadores industriales", "Fabricación de maquinaria pesada", "Embalaje de cartón ondulado", "Industria del plástico y del hule", "Productor de dulces y chocolates"),
+                               `Industria` = c("Sector Industrial", "Fabricación de calentadores industriales", "Fabricación de maquinaria pesada", "Embalaje de cartón ondulado", "Industria del plástico y del hule", "Productor de dulces y chocolates", "Fabricación de muebles, colchones y persianas"),
                                `Manufactura` = c("Manufacturera de productos domésticos de ventilación", "Manufactura", "Servicios de manufactura bajo contrato", "mejorar los procesos de manufactura", "Maquinaria para la industria", "Maquiladora para el rubro médico, aeroespacial, automotriz, tecnología y transporte", "Manufacturera de pisos vinílicos", "Fabricación de equipo de aire acondicionado", "Fabricación de lentes y armazones", "Fabricación de maquinaria y equipo", "Fabricación de materiales biodegradables", "Fabricación de pisos vinílicos", "Fabricación de productos a base de minerales no metálicos", "Fabricación de productos metálicos", "Fabricación de rodamientos", "Fabricación y distribución de cosméticos"),
                                `Minería` = c("Minería", "Siderurgia", "Industria minera", "Otros servicios relacionados con la minería", "Fundición de metales", "Fabricación de acero", "Servicios relacionados con la minería"),
                                `Química` = c("Química", "Producción de plásticos para la industria médica, eléctrico, automotriz y aeroespacial", "Elaboración de plásticos", "Fabricación de botellas de plástico", "Fabricación de gases industriales", "Plásticos", "Manufacturera de productos químicos", "Industria química"),
                                `Salud` = c("Salud", "Fabricación de equipo médico"),
                                `Servicios` = c("Agencias de viajes", "Servicios de Consultoría, Tecnología, Outsourcing, etc.", "Agencia de marketing", "Startup", "Capacitación", "Servicios portuarios", "Servicios logísticos", "Auditoría y control de calidad", "Servicios de gestión", "Outsourcing/servicio al cliente.", "Marketing digital", "Comercio electrónico y logística", "Aplicación para restaurantes", "Motor de búsqueda de empleo", "Servicios de almacenamiento", "Servicios de fabricación", "Servicios de mensajería y paquetería", "Servicios de preparación de alimentos y bebidas"),
                                `Tecnología` = c("Servicio de tecnología avanzada", "Desarrollo tecnológico (Digitalización)", "Tecnologías de la información", "Fabricación de pantallas de celular", "Tecnologías de la comunicación", "Desarrollo tecnológico", "Aplicación de restaurantes", "Software", "Ingeniería de software", "Plataforma tecnológica inmobiliaria", "Infraestructura tecnológica", "Manufactura de tecnologías", "TI", "Creación de Procesadores de cómputo", "Fabricación de equipo de computación", "Fabricación de equipos de cómputo", "Tecnología financiera (Fintech)", "Tecnología para industrias"),
-                               `Telecomunicaciones` = c("Telecomunicaciones", "Data Centers", "Paquetería y mensajería", "Mensajería", "BPO", "Televisora", "Energía y telecomunicaciones", "Comunicación y Transporte", "Mensajería", "Fabricación de equipo de transmisión y recepción de señales de radio y televisión  y equipo de comunicación inalámbrico."),
+                               `Telecomunicaciones` = c("Telecomunicaciones", "Data Centers", "Paquetería y mensajería", "Mensajería", "BPO", "Televisora", "Energía y telecomunicaciones", "Comunicación y Transporte", "Mensajería", "Fabricación de equipo de transmisión y recepción de señales de radio y televisión  y equipo de comunicación inalámbrico.", "Fabricación de equipos de telecomunicaciones"),
                                `Transporte` = c("Transporte", "Generación de electricidad y fabricación de trenes", "Transporte acuático", "Transporte ferroviario", "Construcción de vías de ferrocarril", "Aplicación de servicios de transporte particular", "producción de vagones de ferrocarril", "Fabricante de carros de ferrocarril", "Infraestructura y gestión de autopistas", "Fabricación de equipo de transporte")
   ))
 
@@ -230,7 +237,7 @@ write_xlsx(
        "sector_na" = anuncios_area_na,
        "estado_na" = anuncios_estado_na),
   #"/Users/antoniogarcia/Desktop/R/5. inversión/100. anuncios_na.xlsx", # Ruta Toño
-  "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/100. anuncios.xlsx",
+  "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/100. anuncios.xlsx",
   col_names = T
 )
 
@@ -243,6 +250,6 @@ write_xlsx(
        "estado" = columna_estado,
        "sector" = columna_sector),
   #"/Users/antoniogarcia/Desktop/R/5. inversión/200. anuncios_comprobación.xlsx", # Ruta Toño
-  "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/200. anuncios.xlsx",
+  "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/200. anuncios.xlsx",
   col_names = T
 )
