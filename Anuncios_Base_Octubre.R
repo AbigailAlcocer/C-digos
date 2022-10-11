@@ -1,6 +1,6 @@
-#---------------------------------------------------------------------------------------
-# CARGAR LIBRERÍAS
-#---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+  # CARGAR LIBRERÍAS
+  #---------------------------------------------------------------------------------------
 
 ## Librería
 library("tidyverse")
@@ -62,7 +62,7 @@ anuncios_orig <- read_excel(wb_se, sheet = "Hoja1", col_names = T, range = "A4:S
 
 #Crear columna con la suma de las inversiones
 anuncios_orig <- anuncios_orig %>% replace_na(list(`Inversión anterior a 2019` = 0L, `Inversión en 2019` =0L, `Inversión en 2020` = 0L , `Inversión en 2021`= 0L, `Inversión en 2022` = 0L, `Inversión en 2023` = 0L, `Inversión en 2024` = 0L, `Inversión en 2025`= 0L, `Inversión en 2026` = 0L, `Inversión en 2027` = 0L))
-anuncios_orig$Inversión <- (anuncios_orig$`Inversión anterior a 2019`+anuncios_orig$`Inversión en 2019`+anuncios_orig$`Inversión en 2020`+anuncios_orig$`Inversión en 2021`+ anuncios_orig$`Inversión en 2022`+ anuncios_orig$`Inversión en 2023`+ anuncios_orig$`Inversión en 2024`)
+anuncios_orig$Inversión <- (anuncios_orig$`Inversión anterior a 2019`+anuncios_orig$`Inversión en 2019`+anuncios_orig$`Inversión en 2020`+anuncios_orig$`Inversión en 2021`+ anuncios_orig$`Inversión en 2022`+ anuncios_orig$`Inversión en 2023`+ anuncios_orig$`Inversión en 2024`+ anuncios_orig$`Inversión en 2025`+ anuncios_orig$`Inversión en 2026`+ anuncios_orig$`Inversión en 2027`)
 
 
 anuncios <- anuncios_orig %>% transmute(fecha = ymd(`Fecha de nota`), empresa = `Empresa general`, pais = `País de Origen`, inversion = `Inversión`, 
@@ -200,7 +200,7 @@ anuncios <- anuncios %>%
                                `Hoteles` = c("Hoteles", "Servicios de alojamiento temporal", "Alquiler"),
                                `Industria` = c("Sector Industrial", "Fabricación de calentadores industriales", "Fabricación de maquinaria pesada", "Embalaje de cartón ondulado", "Industria del plástico y del hule", "Productor de dulces y chocolates", "Fabricación de muebles, colchones y persianas"),
                                `Manufactura` = c("Manufacturera de productos domésticos de ventilación", "Manufactura", "Servicios de manufactura bajo contrato", "mejorar los procesos de manufactura", "Maquinaria para la industria", "Maquiladora para el rubro médico, aeroespacial, automotriz, tecnología y transporte", "Manufacturera de pisos vinílicos", "Fabricación de equipo de aire acondicionado", "Fabricación de lentes y armazones", "Fabricación de maquinaria y equipo", "Fabricación de materiales biodegradables", "Fabricación de pisos vinílicos", "Fabricación de productos a base de minerales no metálicos", "Fabricación de productos metálicos", "Fabricación de rodamientos", "Fabricación y distribución de cosméticos"),
-                               `Minería` = c("Minería", "Siderurgia", "Industria minera", "Otros servicios relacionados con la minería", "Fundición de metales", "Fabricación de acero", "Servicios relacionados con la minería"),
+                               `Minería` = c("Minería", "Siderurgia", "Industria minera", "Otros servicios relacionados con la minería", "Fundición de metales", "Fabricación de acero", "Servicios relacionados con la minería", "Siderurgia"),
                                `Química` = c("Química", "Producción de plásticos para la industria médica, eléctrico, automotriz y aeroespacial", "Elaboración de plásticos", "Fabricación de botellas de plástico", "Fabricación de gases industriales", "Plásticos", "Manufacturera de productos químicos", "Industria química"),
                                `Salud` = c("Salud", "Fabricación de equipo médico"),
                                `Servicios` = c("Agencias de viajes", "Servicios de Consultoría, Tecnología, Outsourcing, etc.", "Agencia de marketing", "Startup", "Capacitación", "Servicios portuarios", "Servicios logísticos", "Auditoría y control de calidad", "Servicios de gestión", "Outsourcing/servicio al cliente.", "Marketing digital", "Comercio electrónico y logística", "Aplicación para restaurantes", "Motor de búsqueda de empleo", "Servicios de almacenamiento", "Servicios de fabricación", "Servicios de mensajería y paquetería", "Servicios de preparación de alimentos y bebidas"),
@@ -257,4 +257,4 @@ write_xlsx(
 )
 
 anuncios <- write.xlsx(anuncios, ".xlsx")
-saveWorkbook(anuncios, file = "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/anuncios.final.xlsx" )
+saveWorkbook(anuncios, file = "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/Tabla.xlsx" )
