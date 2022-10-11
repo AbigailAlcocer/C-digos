@@ -13,6 +13,8 @@ library("data.table") # Manipular bases
 #library("skimr") # Resumen estadístico de variables (similar a glimpse)
 #library("janitor") # Limpiar el nombre de las variables en la base
 #library("moderndive") # Trabajar con inferencia estadística (regresiones)
+library("xlsx")
+library("openxlsx")
 
 library("inegiR") # INEGI
 library("siebanxicor") # Banxico
@@ -253,3 +255,6 @@ write_xlsx(
   "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/200. anuncios.xlsx",
   col_names = T
 )
+
+anuncios <- write.xlsx(anuncios, ".xlsx")
+saveWorkbook(anuncios, file = "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/anuncios.final.xlsx" )
