@@ -1,62 +1,3 @@
----------------------------------------------------------------------------------------
-  # CARGAR LIBRERÍAS
-  #---------------------------------------------------------------------------------------
-
-## Librería
-library("tidyverse")
-library("data.table") # Manipular bases
-#library("assertive") # Corroborar clases de variables
-#library("visdat") # Visualizar dataset para corroborar errores 
-#library("stringdist") # Calcular distancia en strings
-#library("fuzzyjoin") # Realizar merge de strings 
-#library("reclin") # Comparar strings en dos datasets 
-#library("skimr") # Resumen estadístico de variables (similar a glimpse)
-#library("janitor") # Limpiar el nombre de las variables en la base
-#library("moderndive") # Trabajar con inferencia estadística (regresiones)
-library("xlsx")
-library("openxlsx")
-
-library("inegiR") # INEGI
-library("siebanxicor") # Banxico
-library("OECD") # OECD
-library("WDI") # World Bank: World Development Indicators
-
-library("readxl") # Leer Excel 1 (en desarrollo)
-library("XLConnect") # Leer Excel 2 (interfaz para leer Excel en R)
-library("writexl") # Exportar archivos Excel
-library("gdata") # Leer Excel 3
-
-library("lubridate") # Manipular fechas
-library("zoo") # Manipular datos
-
-library("ggthemes") # Formato de gráficas
-library("leaflet") # Gráfica de mapas interactivos
-#library("leafle.extras") # Funcionalidades extras de leaflet
-library("ggmap") # Visializaciones espaciales con ggplot2
-library("htmltools") # Herramientas HTML
-library("maps") # Visualizar mapas
-library("mapproj") # Proyecciones de mapas
-library("mapdata") # Bases de datos en mapas
-#library("mxmaps") # Base de mapa de México
-
-#library("httr") # Trabajar con HTML
-#library("DBI") # Trabajar bases en SQL
-#library("jsonlite") # Trabajar APIs en formato JSON
-#library("haven") # Trabajar con datos de SAS, STATA SPSS
-#library("foreign") # Trabajar con datos de SAS, STATA SPSS
-
-#---------------------------------------------------------------------------------------
-# LIMPIAR ENTORNO, DEFINIR TOKEN Y RANGO DE FECHA
-#---------------------------------------------------------------------------------------
-
-# Limpiar entorno
-rm(list = ls())
-
-#---------------------------------------------------------------------------------------
-# DATOS SE: ANUNCIOS DE INVERSIÓN
-#---------------------------------------------------------------------------------------
-
-#wb_se <- "/Users/antoniogarcia/Desktop/R/5. inversiÃ³n/1. Datos/3. anuncios.xlsx" # Ruta Toño
 wb_se <- "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/3. anuncios.xlsx" #Ruta Abi
 anuncios_orig <- read_excel(wb_se, sheet = "Hoja1", col_names = T, range = "A4:S10000") %>% drop_na(`Empresa general`)
 
@@ -125,7 +66,7 @@ anuncios <- anuncios %>%
       "EUAMéxicoMéxicoEUA" = "Estados Unidos",
       "Estados Unidos / Austria" = "Estados Unidos",
       "japón" = "Japón",
-      "Congo República Democrática del" = "Republica Democrática del Congo",
+      "Congo República Democrática del" = "Rep. Dem. del Congo",
       "México- CanadáArgentina" = "Canadá")), pais = str_trim(pais),
     estado = str_replace_all(estado, c(
       "JaliscoNacional" = "Jalisco",
@@ -245,6 +186,7 @@ write_xlsx(
 
 
 # Excel de Comprobación
+
 write_xlsx(
   list("pais" = columna_pais,
        "empresa" = columna_empresa,
@@ -256,5 +198,5 @@ write_xlsx(
   col_names = T
 )
 
-anuncios <- write.xlsx(anuncios, ".xlsx")
-saveWorkbook(anuncios, file = "C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre/Tabla.xlsx" )
+setwd("C:/Users/abiga/OneDrive/Escritorio/SERVICIO SOCIAL SHCP/Anuncios de Inversion/Base_Anuncios_octubre")
+write.xlsx(anuncios, "Tabla.Final.xlsx")
