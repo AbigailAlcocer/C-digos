@@ -10,7 +10,7 @@ library("data.table") # Manipular bases
 #library("stringdist") # Calcular distancia en strings
 #library("fuzzyjoin") # Realizar merge de strings 
 #library("reclin") # Comparar strings en dos datasets 
-#library("skimr") # Resumen estadÃ­stico de variables (similar a glimpse)
+#library("skimr") # Resumen estadístico de variables (similar a glimpse)
 #library("janitor") # Limpiar el nombre de las variables en la base
 #library("moderndive") # Trabajar con inferencia estadística (regresiones)
 
@@ -187,11 +187,11 @@ rs_sport <- obtener(id_rs_sport) %>% rename(`Bienes deportivos` = value)
 rs_mercha <- obtener(id_rs_mercha) %>% rename(`Mercancía general` = value)
 # Comida y Bebida
 rs_fbstore <- obtener(id_rs_fbstore) %>% rename(`Comida y bebida` = value)
-# MiscelÃ¡nea
-rs_misce <- obtener(id_rs_misce) %>% rename(`MiscelÃ¡nea` = value)
+# Miscelánea
+rs_misce <- obtener(id_rs_misce) %>% rename(`Miscelánea` = value)
 # Muebles para el hogar
 rs_furni <- obtener(id_rs_furni) %>% rename(`Muebles para el hogar` = value)
-# Comercio electrÃ³nico
+# Comercio electrónico
 rs_nonstore <- obtener(id_rs_nonstore) %>% rename(`Comercio electrónico` = value)
 # Salud y cuidado personal
 rs_health <- obtener(id_rs_health) %>% rename(`Salud y cuidado personal` = value)
@@ -199,9 +199,9 @@ rs_health <- obtener(id_rs_health) %>% rename(`Salud y cuidado personal` = value
 rs_clothing <- obtener(id_rs_clothing) %>% rename(`Ropa y accesorios` = value)
 # Autopartes
 rs_motor <- obtener(id_rs_motor) %>% rename(`Autopartes` = value)
-# ElectrÃ³nicos
+# Electrónicos
 rs_electro <- obtener(id_rs_electro) %>% rename(`Electrónicos` = value)
-# Materiales de construcciÃ³n
+# Materiales de construcción
 rs_building <- obtener(id_rs_building) %>% rename(`Materiales de construcción` = value)
 
 
